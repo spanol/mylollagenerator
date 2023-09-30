@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const clientId: string = '1d1e246f57d74196bd8c7b4d6a850993';
 const clientSecret: string = '670cb87379e84a0894c5c559d4ccf4bf';
-const redirectUri: string = 'http://localhost:8080/generated';
+const redirectUri: string = 'https://mylollagenerator.vercel.app/generated';
 const scopes: string = 'user-read-private user-read-email';
 
 const authEndpoint: string = 'https://accounts.spotify.com/authorize';
