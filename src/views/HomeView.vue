@@ -5,7 +5,7 @@
     </div>
 
     <div class="mt-4">
-      <button type="button" class="btn btn-success">Log in with spotify</button>
+      <SpotifyLogin></SpotifyLogin>
     </div>
 
     <div class="d-flex flex-column mt-4">
@@ -23,14 +23,6 @@
   </div>
 </template>
 
-<script lang="ts">
-import { Options, Vue } from 'vue-class-component';
-import HelloWorld from '@/components/HelloWorld.vue';
-
-@Options({
-  components: {
-    HelloWorld,
-  },
-})
-export default class HomeView extends Vue { }
+<script setup lang="ts">
+import SpotifyLogin from '@/components/SpotifyLogin.vue'
 </script>

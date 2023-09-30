@@ -13,3 +13,7 @@
     
   </nav>
 </template>
+
+<script setup lang="ts">
+console.log(process.env.clientId)
+</script>
