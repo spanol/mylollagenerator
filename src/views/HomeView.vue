@@ -1,5 +1,26 @@
 <template>
-Hello
+  <div class="interaction mt-5 text-center">
+    <div class="informative">
+      Turn your favorite artists into the Lollapalooza line-up!
+    </div>
+
+    <div class="mt-4">
+      <button type="button" class="btn btn-success">Log in with spotify</button>
+    </div>
+
+    <div class="d-flex flex-column mt-4">
+
+      <label for="basic-url" class="form-label"> You can also connect your Last.fm
+      </label>
+      <div class="input-group mb-3 px-5">
+        <span class="input-group-text" id="basic-addon3">https://example.com/users/</span>
+        <input type="text" placeholder="Your nickname here..." class="form-control" id="basic-url"
+          aria-describedby="basic-addon3">
+        <button type="button" class="btn btn-danger">Log in with Last.fm</button>
+      </div>
+
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
@@ -11,5 +32,5 @@ import HelloWorld from '@/components/HelloWorld.vue';
     HelloWorld,
   },
 })
-export default class HomeView extends Vue {}
+export default class HomeView extends Vue { }
 </script>
