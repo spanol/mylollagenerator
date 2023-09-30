@@ -17,10 +17,13 @@ onMounted(async () => {
   if (code) {
     try {
       accessToken.value = await store.dispatch('getAccessToken', code);
-      console.log(accessToken.value)
+      const topArtists =  await store.dispatch('getTopArtists')
+      console.log(topArtists)
     } catch (error) {
       console.error('Erro ao obter o token de acesso', error);
     }
   }
 });
+
+
 </script>
