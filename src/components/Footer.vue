@@ -1,5 +1,5 @@
 <template>
-  <footer class="mt-5 d-flex flex-column text-center justify-content-center">
+  <footer class="footer mt-5 d-flex flex-column text-center justify-content-center">
     <div class="author">
       <p>Developed by: Vinicius Spanol</p>
     </div>
@@ -22,24 +22,27 @@
 <script setup lang="ts">
 const icons = [
   {
-    name: 'Facebook', icon: 'bi-facebook', link: 'https://www.facebook.com/zast.oficial'
+    name: 'Facebook', icon: 'bi-facebook', link: 'https://www.facebook.com/'
   },
   {
-    name: 'Instagram', icon: 'bi-instagram', link: 'https://www.instagram.com/zast.oficial'
+    name: 'Instagram', icon: 'bi-instagram', link: 'https://www.instagram.com/'
   },
   {
-    name: 'Twitter', icon: 'bi-twitter', link: 'https://twitter.com/zast_delivery'
+    name: 'Twitter', icon: 'bi-twitter', link: 'https://twitter.com/'
   },
   {
-    name: 'Youtube', icon: 'bi-youtube', link: 'https://www.youtube.com/channel/UC-nulVD2BotUooH-p17wbWA'
-  },
-  {
-    name: 'Linkedin', icon: 'bi-linkedin', link: 'https://www.linkedin.com/company/zast/?viewAsMember=true'
+    name: 'Linkedin', icon: 'bi-linkedin', link: 'https://www.linkedin.com/'
   }
 ]
 </script>
 
 <style scoped lang="scss">
+.footer{
+  position: relative;
+  bottom: 0px;
+  width: 100%;
+  background-color: #1FDF64;
+}
 .link{
   font-size: 1.5rem;
   font-weight: 800;
@@ -47,8 +50,7 @@ const icons = [
 }
 
 .icon{
-  font-size: 2rem;
-  color: #fff;
+  color: black;
   margin: 0 1rem;
   border-radius: 50%;
 }

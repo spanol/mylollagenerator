@@ -1,4 +1,5 @@
 import { spotifyApi, getAccessToken, getLoginUrl } from '@/services/api';
+import { Artist } from '@/types/SpotifyTypes';
 import { InjectionKey } from 'vue';
 import { Store, createStore, useStore as baseUseStore } from 'vuex'
 export const key: InjectionKey<Store<any>> = Symbol();
@@ -42,7 +43,20 @@ const actions = {
       throw error;
     }
   },
-  async getTopArtists({ state }: any) {
+  async getTop<T>({ state }: any, target: string): Promise<T[]> {
+    try {
+      const response = await spotifyApi.get('/me/top/' + target, {
+        headers: {
+          Authorization: `Bearer ${state.accessToken}`,
+        },
+      });
+      return response.data.items as T[];
+    } catch (error) {
+      console.error(`Erro ao obter os ${target} mais curtidos`, error);
+      throw error;
+    }
+  },
+  async getTopGenres({ state }: any) {
     try {
       const response = await spotifyApi.get('/me/top/artists', {
         headers: {
