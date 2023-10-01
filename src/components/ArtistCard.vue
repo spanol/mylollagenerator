@@ -26,29 +26,31 @@ const { name, imageUrl } = toRefs(props);
   background-color: #121212;
   width: 250px;
   height: 300px;
-  pointer-events: none;
   cursor: pointer;
   border-radius: 8px;
   overflow: hidden;
   color: #ffffff;
   transition: transform .2s ease-in-out;
-  
+
   &:hover {
     transform: scale(1.05);
   }
-  
+
   .image-container {
     width: 100%;
     height: 200px;
+
     img {
       width: 100%;
+      pointer-events: none;
       height: 100%;
       object-fit: cover;
     }
   }
-  
+
   .info {
     padding: 10px;
+
     .name {
       font-size: 18px;
       font-weight: 500;

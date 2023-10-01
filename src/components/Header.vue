@@ -1,6 +1,6 @@
 <template>
-  <nav class="d-flex flex-column text-center border-green">
-      <h1>Your Spotify Top Artists</h1>
+  <nav class="d-flex flex-column text-center mb-5">
+      <h1>Your Spotify Artists Podium</h1>
   </nav>
 </template>
 

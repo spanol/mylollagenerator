@@ -3,14 +3,10 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
 import { useStore } from '@/store';
 
 const store = useStore();
 const loginWithSpotify = () => {
   store.dispatch('loginWithSpotify');
 };
-
-const accessToken = computed(() => store.getters.accessToken);
-console.log(accessToken.value)
 </script>

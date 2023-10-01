@@ -1,9 +1,9 @@
 <template>
   <Header />
-  <div class="view d-flex justify-content-center align-items-center">
+  <div class="view d-flex justify-content-center align-items-center pt-5">
     <router-view />
   </div>
-  <Footer />
+  <!-- <Footer /> -->
 </template>
 
 <style>
