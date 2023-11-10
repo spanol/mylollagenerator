@@ -1,14 +1,14 @@
 <template>
-  <div class="interaction mt-5 text-center">
+  <div class="interaction d-flex flex-column justify-content-center mt-5 text-center">
     <div class="informative">
       Make your own Lollapalooza line-up based on your Spotify top artists!!!
     </div>
 
     <div class="mt-5">
-      <SpotifyLogin></SpotifyLogin>
+      <SpotifyLogin/>
     </div>
 
-    <div class="d-flex flex-column mt-4">
+    <!-- <div class="d-flex flex-column mt-4">
       <label for="basic-url" class="form-label"> You can also connect your Last.fm
       </label>
       <div class="input-group mb-3 px-5">
@@ -17,7 +17,7 @@
           aria-describedby="basic-addon3">
         <button type="button" class="btn btn-danger">Log in with Last.fm</button>
       </div>
-    </div>
+    </div> -->
 
   </div>
 </template>
