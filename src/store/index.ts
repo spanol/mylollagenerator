@@ -1,7 +1,7 @@
-import { spotifyApi, getAccessToken, getLoginUrl } from '@/services/api';
-import { Artist } from '@/types/SpotifyTypes';
+import { spotifyApi, getAccessToken as getAccessTokenApi, getLoginUrl } from '@/services/api';
 import { InjectionKey } from 'vue';
 import { Store, createStore, useStore as baseUseStore } from 'vuex'
+
 export const key: InjectionKey<Store<any>> = Symbol();
 
 interface StoreModel{
@@ -26,7 +26,7 @@ const actions = {
       window.location.href = url;
       const code = new URL(window.location.href).searchParams.get('code');
       if (code) {
-        const accessToken = await getAccessToken(code);
+        const accessToken = await getAccessTokenApi(code);
         commit('SET_ACCESS_TOKEN', accessToken);
       }
     } catch (error) {
@@ -35,7 +35,7 @@ const actions = {
   },
   async getAccessToken({ commit }: any, code: string) {
     try {
-      const accessToken = await getAccessToken(code);
+      const accessToken = await getAccessTokenApi(code);
       commit('SET_ACCESS_TOKEN', accessToken);
       return accessToken;
     } catch (error) {
