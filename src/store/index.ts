@@ -43,7 +43,7 @@ const actions = {
       throw error;
     }
   },
-  async getTop<T>({ state }: any, target: string, limit: number = 70): Promise<T[]> {
+  async getTop<T>({ state }: any, target: string, limit: number = 50): Promise<T[]> {
     try {
       const response = await spotifyApi.get(`/me/top/${target}?limit=${limit}`, {
         headers: {
