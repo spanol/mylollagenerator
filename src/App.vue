@@ -1,21 +1,22 @@
 <template>
   <Header />
-  <div class="view d-flex justify-content-center align-items-center pt-5">
+  <div class="container view">
     <router-view />
   </div>
-  <!-- <Footer /> -->
+  <Footer />
 </template>
 
-<style>
+<style lang="scss">
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 body,
 html {
-  min-height: 100vh !important;
   background-color: black !important;
   color: white !important;
-}
-
-.view {
-  min-height: 400px;
+  font-family: 'Anton', sans-serif !important;
+  background-image: url('@/assets/Background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 </style>
 

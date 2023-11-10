@@ -1,7 +1,7 @@
 <template>
-  <footer class="footer mt-5 d-flex flex-column text-center justify-content-center">
+  <footer class="footer mt-5 p-2 d-flex align-items-center text-center justify-content-center">
     <div class="author">
-      <p>Developed by: Vinicius Spanol</p>
+      <p class="m-0">Developed by: Vinicius Spanol</p>
     </div>
 
     <div class="socials">
@@ -12,26 +12,16 @@
       </div>
     </div>
 
-    <div class="help-me">
-      
-    </div>
-
   </footer>
 </template>
 
 <script setup lang="ts">
 const icons = [
   {
-    name: 'Facebook', icon: 'bi-facebook', link: 'https://www.facebook.com/'
+    name: 'Github', icon: 'bi-github', link: 'https://www.facebook.com/code_spanol'
   },
   {
-    name: 'Instagram', icon: 'bi-instagram', link: 'https://www.instagram.com/'
-  },
-  {
-    name: 'Twitter', icon: 'bi-twitter', link: 'https://twitter.com/'
-  },
-  {
-    name: 'Linkedin', icon: 'bi-linkedin', link: 'https://www.linkedin.com/'
+    name: 'Linkedin', icon: 'bi-linkedin', link: 'https://www.linkedin.com/in/vinicius-spanol/'
   }
 ]
 </script>

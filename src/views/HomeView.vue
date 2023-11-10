@@ -1,15 +1,14 @@
 <template>
   <div class="interaction mt-5 text-center">
     <div class="informative">
-      Know your spotify statistics
+      Make your own Lollapalooza line-up based on your Spotify top artists!!!
     </div>
 
-    <div class="mt-4">
+    <div class="mt-5">
       <SpotifyLogin></SpotifyLogin>
     </div>
 
-    <!-- <div class="d-flex flex-column mt-4">
-
+    <div class="d-flex flex-column mt-4">
       <label for="basic-url" class="form-label"> You can also connect your Last.fm
       </label>
       <div class="input-group mb-3 px-5">
@@ -18,11 +17,17 @@
           aria-describedby="basic-addon3">
         <button type="button" class="btn btn-danger">Log in with Last.fm</button>
       </div>
+    </div>
 
-    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import SpotifyLogin from '@/components/SpotifyLogin.vue'
 </script>
+
+<style lang="scss">
+.interaction{
+  min-height: 100vh;
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <button @click="loginWithSpotify" type="button" class="btn btn-success">Log in with spotify</button>
+  <button @click="loginWithSpotify" type="button" class="btn btn-lg btn-success">Log in with spotify</button>
 </template>
 
 <script lang="ts" setup>

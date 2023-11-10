@@ -14,7 +14,7 @@ const state: StoreModel = {
 };
 
 const mutations = {
-  SET_ACCESS_TOKEN(state: any, accessToken: string) { // Adicionado para definir o token de acesso no estado
+  SET_ACCESS_TOKEN(state: any, accessToken: string) {
     state.accessToken = accessToken;
   },
 };
@@ -43,9 +43,9 @@ const actions = {
       throw error;
     }
   },
-  async getTop<T>({ state }: any, target: string): Promise<T[]> {
+  async getTop<T>({ state }: any, target: string, limit: number = 70): Promise<T[]> {
     try {
-      const response = await spotifyApi.get('/me/top/' + target, {
+      const response = await spotifyApi.get(`/me/top/${target}?limit=${limit}`, {
         headers: {
           Authorization: `Bearer ${state.accessToken}`,
         },
