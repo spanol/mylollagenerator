@@ -1,15 +1,23 @@
 <template>
-  <div class="generated">
+  <div v-if="artists" class="generated">
     <div class="d-flex justify-content-center">
       <LIneupCard :artists="artists" />
     </div>
-    
+
     <DownloadAsPNG elementClass=".template-wrapper" />
+  </div>
+
+  <div v-else class="loading d-flex justify-content-center align-items-center">
+    <LoadingComponent />
   </div>
 </template>
 
 <style lang="scss">
-.generated{
+.loading{
+  min-height: 100vh;
+}
+
+.generated, .loading {
   padding-block: 180px;
 }
 </style>
@@ -23,10 +31,13 @@ import { toast } from 'vue3-toastify';
 
 import DownloadAsPNG from '@/components/DownloadAsPNG.vue';
 import LIneupCard from '@/components/LIneupCard.vue';
+import LoadingComponent from '@/components/LoadingComponent.vue';
 import router from '@/router';
 
 const store = useStore();
 const route = useRoute();
+
+let isLoading = ref<boolean>(false);
 const accessToken = ref<string | null>(null);
 const artists = ref<Artist[] | null>(null);
 
@@ -34,8 +45,9 @@ const artists = ref<Artist[] | null>(null);
 
 onMounted(async () => {
   const code = route.query.code as string | null;
+  isLoading.value = true;
   console.log(code)
-  
+
   if (!code) {
     router.push({ path: '/' });
     toast.error('Something went wrong!');
@@ -51,7 +63,12 @@ onMounted(async () => {
   } catch (error) {
     console.error('Erro ao obter o token de acesso', error);
     router.push({ path: '/' });
-    setTimeout(()=> toast.error('Não foi possível autenticar o usuário!!!'), 1000);
+    setTimeout(() => toast.error('Não foi possível autenticar o usuário!!!'), 1000);
+  } finally {
+    setTimeout(() => {
+      isLoading.value = false;
+    }, 3000);
   }
 });
 </script>
+      

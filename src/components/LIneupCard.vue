@@ -1,5 +1,5 @@
 <template>
-  <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-5">
+  <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-0 pt-md-5">
     <div class="lineup d-flex justify-content-around align-items-center">
       <div class="featured text-end ps-3">
         <template v-for="featuredArtist in featuredArtists">
@@ -30,9 +30,19 @@
   width: 800px;
   height: 916px;
 
+  @media (max-width: 992px) {
+    width: 700px;
+    height: 805px;
+  }
+
+  @media (max-width: 768px) {
+    width: 600px;
+    height: 687px;
+  }
+
   @media (max-width: 576px) {
-    width: 500px;
-    height: 544px;
+    width: 400px;
+    height: 500px;
   }
 
   .lineup {
@@ -43,11 +53,36 @@
     .featured {
       h2 {
         font-size: 3rem !important;
+
+        @media (max-width: 992px) {
+          font-size: 2.5rem !important;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 2rem !important;
+        }
+
+        @media (max-width: 576px) {
+          font-size: 1.5rem !important;
+        }
       }
     }
 
     .standard {
       font-size: 1.7rem !important;
+
+      @media (max-width: 992px) {
+        font-size: 1.5rem !important;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 1.3rem !important;
+      }
+
+      @media (max-width: 576px) {
+        font-size: .7rem !important;
+      }
+
     }
 
   }
