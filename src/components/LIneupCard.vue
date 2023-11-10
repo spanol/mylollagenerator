@@ -1,6 +1,6 @@
 <template>
-  <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-0 pt-md-5">
-    <div class="lineup d-flex justify-content-around align-items-center">
+  <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-5">
+    <div class="lineup d-flex justify-content-around align-items-center pt-0 pt-md-5">
       <div class="featured text-end ps-3">
         <template v-for="featuredArtist in featuredArtists">
           <h2>
@@ -32,18 +32,20 @@
 
   @media (max-width: 992px) {
     width: 700px;
-    height: 805px;
+    height: 808px;
   }
 
   @media (max-width: 768px) {
     width: 600px;
-    height: 687px;
+    height: 604px;
   }
 
-  @media (max-width: 576px) {
+  @media (max-width: 368px) {
     width: 400px;
     height: 500px;
   }
+
+
 
   .lineup {
     margin-top: 85px;
@@ -63,7 +65,11 @@
         }
 
         @media (max-width: 576px) {
-          font-size: 1.5rem !important;
+          font-size: 1.9rem !important;
+        }
+
+        @media (max-width: 368px) {
+          font-size: 1.3rem !important;
         }
       }
     }
@@ -76,13 +82,12 @@
       }
 
       @media (max-width: 768px) {
-        font-size: 1.3rem !important;
+        font-size: 1.1rem !important;
       }
 
       @media (max-width: 576px) {
-        font-size: .7rem !important;
+        font-size: 1rem !important;
       }
-
     }
 
   }
