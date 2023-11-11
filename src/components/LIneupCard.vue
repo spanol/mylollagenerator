@@ -1,6 +1,6 @@
 <template>
   <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-5">
-    <div class="lineup d-flex justify-content-around align-items-center pt-0 pt-md-5">
+    <div class="lineup d-flex justify-content-around align-items-sm-center pt-0 pt-md-5">
       <div class="featured text-end ps-3">
         <template v-for="featuredArtist in featuredArtists">
           <h2>
@@ -14,7 +14,7 @@
           <span class="artist-name" :class="{ 'mr-2': index < (artists.length - 1) - 7 }">
             {{ artist.name }}
           </span>
-          <span v-if="index < (artists.length - 1) - 7" class="bullet-point text-success">&nbsp;•&nbsp;</span>
+          <i v-if="index < (artists.length - 1) - 7" class="bullet-point text-success">&nbsp;•&nbsp;</i>
         </template>
       </div>
     </div>
@@ -52,6 +52,15 @@
     color: black;
     text-transform: uppercase;
 
+    @media (max-width: 992px) {
+      margin-top: 55px;
+    }
+
+    @media(max-width: 576px){
+      max-height: 305px;
+      overflow: hidden;
+    }
+
     .featured {
       h2 {
         font-size: 3rem !important;
@@ -69,7 +78,7 @@
         }
 
         @media (max-width: 368px) {
-          font-size: 1.3rem !important;
+          font-size: 1.5rem !important;
         }
       }
     }
@@ -88,6 +97,10 @@
       @media (max-width: 576px) {
         font-size: 1rem !important;
       }
+
+      @media (max-width: 368px) {
+          font-size: .8rem !important;
+        }
     }
 
   }
