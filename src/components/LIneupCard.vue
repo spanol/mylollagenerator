@@ -1,9 +1,9 @@
 <template>
   <div v-if="artists" class="template-wrapper rounded-4 shadow-lg pt-5">
-    <div class="lineup d-flex justify-content-around align-items-sm-center pt-0 pt-md-5">
+    <div class="lineup d-flex justify-content-around pt-0 pt-md-5">
       <div class="featured text-end ps-3">
         <template v-for="featuredArtist in featuredArtists">
-          <h2>
+          <h2 class="mb-0">
             {{ featuredArtist.name }}
           </h2>
         </template>
@@ -11,7 +11,7 @@
 
       <div class="standard d-flex flex-wrap ps-3">
         <template v-for="(artist, index) in artists?.slice(7)">
-          <span class="artist-name" :class="{ 'mr-2': index < (artists.length - 1) - 7 }">
+          <span class="artist-name">
             {{ artist.name }}
           </span>
           <i v-if="index < (artists.length - 1) - 7" class="bullet-point text-success">&nbsp;•&nbsp;</i>
@@ -53,10 +53,16 @@
     text-transform: uppercase;
 
     @media (max-width: 992px) {
-      margin-top: 55px;
+      margin-top: 75px;
     }
 
     @media(max-width: 576px){
+      max-height: 355px;
+      overflow: hidden;
+    }
+
+    @media(max-width: 360px){
+      margin-top: 55px;
       max-height: 305px;
       overflow: hidden;
     }
