@@ -6,7 +6,7 @@
 import { useStore } from '@/store';
 
 const store = useStore();
-const loginWithSpotify = () => {
-  store.dispatch('loginWithSpotify');
+const loginWithSpotify = async () => {
+  await store.dispatch('loginWithSpotify');
 };
 </script>
