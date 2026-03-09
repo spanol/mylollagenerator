@@ -27,6 +27,7 @@ import { ref, onMounted } from 'vue';
 import { useStore } from '@/store';
 import { useRoute } from 'vue-router';
 import { Artist } from '@/types/SpotifyTypes';
+import { validateState } from '@/services/api';
 import { toast } from 'vue3-toastify';
 
 import DownloadAsPNG from '@/components/DownloadAsPNG.vue';
@@ -38,37 +39,29 @@ const store = useStore();
 const route = useRoute();
 
 let isLoading = ref<boolean>(false);
-const accessToken = ref<string | null>(null);
 const artists = ref<Artist[] | null>(null);
-
-
 
 onMounted(async () => {
   const code = route.query.code as string | null;
+  const state = route.query.state as string | null;
   isLoading.value = true;
-  console.log(code)
 
-  if (!code) {
+  if (!code || !validateState(state)) {
     router.push({ path: '/' });
     toast.error('Something went wrong!');
+    return;
   }
 
   try {
-    accessToken.value = await store.dispatch('getAccessToken', code);
-    if (accessToken.value) {
-      artists.value = await store.dispatch('getTop', 'artists');
-      toast.success('Your Lollapalooza line-up is ready!!!');
-      console.log(artists.value)
-    }
+    await store.dispatch('getAccessToken', code);
+    artists.value = await store.dispatch('getTop', 'artists');
+    toast.success('Your Lollapalooza line-up is ready!!!');
   } catch (error) {
-    console.error('Erro ao obter o token de acesso', error);
+    console.error('Failed to authenticate with Spotify', error);
     router.push({ path: '/' });
-    setTimeout(() => toast.error('Não foi possível autenticar o usuário!!!'), 1000);
+    setTimeout(() => toast.error('Could not authenticate. Please try again.'), 1000);
   } finally {
-    setTimeout(() => {
-      isLoading.value = false;
-    }, 3000);
+    isLoading.value = false;
   }
 });
 </script>
-      

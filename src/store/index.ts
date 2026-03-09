@@ -1,109 +1,88 @@
 import {
   spotifyApi,
   getAccessToken as getAccessTokenApi,
+  refreshAccessToken as refreshAccessTokenApi,
   getLoginUrl,
+  TokenResponse,
 } from "@/services/api";
 import { InjectionKey } from "vue";
 import { Store, createStore, useStore as baseUseStore } from "vuex";
 
-export const key: InjectionKey<Store<any>> = Symbol();
+export const key: InjectionKey<Store<StoreModel>> = Symbol();
 
 interface StoreModel {
   accessToken: string;
+  refreshToken: string;
+  tokenExpiresAt: number;
 }
 
 const state: StoreModel = {
   accessToken: "",
+  refreshToken: "",
+  tokenExpiresAt: 0,
 };
 
 const mutations = {
-  SET_ACCESS_TOKEN(state: any, accessToken: string) {
-    state.accessToken = accessToken;
+  SET_TOKEN_DATA(state: StoreModel, tokenData: TokenResponse) {
+    state.accessToken = tokenData.access_token;
+    state.refreshToken = tokenData.refresh_token;
+    state.tokenExpiresAt = Date.now() + tokenData.expires_in * 1000;
   },
 };
 
 const actions = {
-  // async loginWithSpotify({ commit }: any) {
-  //   try {
-  //     const url = getLoginUrl();
-  //     window.location.href = url;
-  //     const code = new URL(window.location.href).searchParams.get("code");
-  //     if (code) {
-  //       const accessToken = await getAccessTokenApi(code);
-  //       commit("SET_ACCESS_TOKEN", accessToken);
-  //     }
-  //   } catch (error) {
-  //     console.error("Erro ao logar com Spotify", error);
-  //   }
-  // },
   async loginWithSpotify() {
-    const url = await getLoginUrl();
+    const url = getLoginUrl();
     window.location.href = url;
   },
-  async handleRedirect({ commit }: any) {
-    const code = new URL(window.location.href).searchParams.get("code");
-    if (code) {
-      const accessToken = await getAccessTokenApi(code);
-      commit("SET_ACCESS_TOKEN", accessToken);
-    }
+  async getAccessToken(
+    { commit }: { commit: Function },
+    code: string
+  ): Promise<string> {
+    const tokenData = await getAccessTokenApi(code);
+    commit("SET_TOKEN_DATA", tokenData);
+    return tokenData.access_token;
   },
-  async getAccessToken({ commit }: any, code: string) {
-    try {
-      const accessToken = await getAccessTokenApi(code);
-      commit("SET_ACCESS_TOKEN", accessToken);
-      return accessToken;
-    } catch (error) {
-      console.error("Erro ao obter o token de acesso", error);
-      throw error;
+  async ensureValidToken({
+    state,
+    commit,
+  }: {
+    state: StoreModel;
+    commit: Function;
+  }): Promise<string> {
+    if (state.accessToken && Date.now() < state.tokenExpiresAt - 60000) {
+      return state.accessToken;
     }
+    if (state.refreshToken) {
+      const tokenData = await refreshAccessTokenApi(state.refreshToken);
+      commit("SET_TOKEN_DATA", tokenData);
+      return tokenData.access_token;
+    }
+    throw new Error("No valid token available");
   },
   async getTop<T>(
-    { state }: any,
-    target: string,
-    limit: number = 50
+    { state, dispatch }: { state: StoreModel; dispatch: Function },
+    target: string
   ): Promise<T[]> {
-    try {
-      const response = await spotifyApi.get(
-        `/me/top/${target}?limit=${limit}`,
-        {
-          headers: {
-            Authorization: `Bearer ${state.accessToken}`,
-          },
-        }
-      );
-      return response.data.items as T[];
-    } catch (error) {
-      console.error(`Erro ao obter os ${target} mais curtidos`, error);
-      throw error;
-    }
-  },
-  async getTopGenres({ state }: any) {
-    try {
-      const response = await spotifyApi.get("/me/top/artists", {
-        headers: {
-          Authorization: `Bearer ${state.accessToken}`,
-        },
-      });
-      return response.data.items;
-    } catch (error) {
-      console.error("Erro ao obter os artistas mais curtidos", error);
-      throw error;
-    }
+    const token = await dispatch("ensureValidToken");
+    const response = await spotifyApi.get(`/me/top/${target}?limit=50`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data.items as T[];
   },
 };
 
 const getters = {
-  accessToken: (state: any) => state.accessToken,
+  accessToken: (state: StoreModel) => state.accessToken,
 };
 
-const modules = {};
-
-export const store = createStore<any>({
+export const store = createStore<StoreModel>({
   state,
   mutations,
   actions,
   getters,
-  modules,
 });
 
 export function useStore() {
